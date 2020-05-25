@@ -1,0 +1,62 @@
+#navigation {
+    background: white;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    paddong-left: 10px;
+    z-index: 101;
+    height: 30px;
+    font-size: 20px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    text-align: center;
+    margin: 0px;
+}
+
+main {
+    padding: 20px;
+    padding-top:30px;
+}
+
+.move {
+    position: fixed;
+    background-color: WHITE;
+    margin: 60px;
+    padding: 60px;
+    width: 50%;
+
+}
+
+div {
+    font-size: 30px;
+
+}
+
+.basic-column {
+    border: 0px;
+    width: 15%;
+    box-sizing: border-box;
+    margin: 10px;
+    margin-right: 20px;
+}
+
+.basic-table {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    background-color: white;
+
+}
+
+.search-column {
+    border: 0px;
+    margin: 10px;
+}

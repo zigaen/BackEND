@@ -1,0 +1,35 @@
+.basic-box {
+    width: 200px; height: 25px; border: 2px solid grey; margin-bottom: 20px;
+    margin: 50px 0 20px 200px;
+    text-align: center; /* Poravnava horizontalna v sredino */
+    line-height: 30px
+}
+
+p {
+    font-size: 20px;
+}
+
+div {
+    font-size: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+body {
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+img {
+
+    border: 5px solid #663366
+}
+
+button {
+    color: white;
+    background-color: black;
+}
+
+
+    <!-- cel slog je lahko napisan tudi inline, vendar ga raje izvozimo v drug file --!>
