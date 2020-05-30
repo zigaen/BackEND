@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Success{% endblock title %}
+
+{% block content %}
+<h3>Success!</h3>
+{% if name %}
+<p>Hello {{name}}!</p>
+{% endif %}
+
+<p>Your message was successfully received. Thank you!</p>
+
+{% endblock content %}
