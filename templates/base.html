@@ -2,18 +2,17 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>SmartNinja with Jinja</title>
-
+        <title>{% block title %}{% endblock title %}</title>
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
 
     <body>
-    <h1>Let's try out Jinja!</h1>
-    <p>
-    <a href="/">Home</a>,
-    <a href="/about-me">About me</a>
-    </p>
-
+    <div class="container">
+        <a href="/">Home</a>
+        <a href="/about-me">About me</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/guess">Guess the number game</a>
+    </div>
     {% block content %}
     {% endblock content %}
     </body>

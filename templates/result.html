@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if message %}
+    <h2>{{message}}!</h2>
+    {% endif %}
+
+    <form method="post" action="/result">
+        <input type="text" name="guessi" placeholder="Enter number 1-30">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+{% endblock content %}

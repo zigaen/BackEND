@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Portfolio</title>
-        <link rel="stylesheet" href="/static/css/style.css">
-    </head>
-
-    <body>
+{% extends "base.html" %}
+{% block title %} Homepage {% endblock title %}
+{% block content %}
         <h1>this is Portfolio  ;)</h1>
         <a href="/about-me">about</a>
         <a href="/">index</a>
@@ -15,5 +9,4 @@
             <li><a href="/boogle">boogle</a></li>
             <li><a href="https://april-izziv.herokuapp.com/">Aprilski izziv</a></li>
         </ul>
-    </body>
-</html>
+{% endblock content %}

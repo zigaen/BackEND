@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-
+{% block title %} Homepage {% endblock title %}
 {% block content %}
-        <h1>INDEX: Welcome back to HTML ;)</h1>
-        <p>{{some_text}}</p>
         <p>Current year: {{current_year}}</p>
+        <p>Current hour: {{current_hour}}</p>
         {% for city in cities %}
         <p>{{city}}</p>
         {% endfor %}
-
-        <a href="/about-me">About</a>
-        <a href="/portfolio">Portfolio</a>
-        <a href="/base">Jinja</a>
-
+        <li>
+        <ul> <a href="/about-me">About</a> </ul>
+        <ul> <a href="/portfolio">Portfolio</a> </ul>
+        <ul> <a href="/base">Jinja</a> </ul>
+        <ul> <a href="/guess">Guess the number game</a> </ul>
+        </li>
         <img src="/static/img/smartninja-logo.png">
 
 {% endblock content %}

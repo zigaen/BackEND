@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, make_response
 import datetime
+import random
 
 app = Flask(__name__)
 
@@ -8,9 +9,11 @@ app = Flask(__name__)
 def index():
     some_text = "Message from the handler."
     current_year = datetime.datetime.now().year
+    current_hour = datetime.datetime.now().hour
     cities = ["Boston", "Vienna", "Paris", "Berlin"]
+    user_name = request.cookies.get("user_name")
 
-    return render_template("index.html", some_text=some_text, current_year=current_year, cities=cities)
+    return render_template("index.html", some_text=some_text, current_year=current_year, current_hour=current_hour, cities=cities, name=user_name)
 
 
 @app.route("/about-me", methods=["GET", "POST"])
@@ -32,6 +35,9 @@ def about():
 
         return response
 
+@app.route("/guess", methods=["GET", "POST"])
+def guess():
+    return render_template("guess.html")
 
 @app.route("/portfolio")
 def portfolio():
