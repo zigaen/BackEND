@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block title %} Guess the number {% endblock title %}
 {% block content %}
-<h1>You will guess the secret number!</h1>
-<h1><a href="/result">Go to page!</a></h1>
+<h1>Let's play a secret number game!</h1>
+<form method="post" action="/guess">
+    <input type="number" name="number_1_30" placeholder="Enter random number">
+    <br>
+    <button type="submit">Submit</button>
+    <h3>You wrote number: {{number_1_30}}</h3>
+    <h3>{{message}}</h3>
+</form>
 {% endblock content %}

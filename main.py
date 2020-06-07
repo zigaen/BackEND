@@ -10,8 +10,10 @@ number = random.randint(1, 40)
 def index():
     some_number = request.cookies.get("some_number")
     user_name = request.cookies.get("user_name")
-
-    some_text = "Message from the handler."
+    if user_name:
+        some_text = user_name + ",  mesta iz vrha tvoje glave so: "
+    else:
+        some_text = "Mesta iz vrha glave so: "
     current_year = datetime.datetime.now().year
     current_hour = datetime.datetime.now().minute
     cities = ["Boston", "Vienna", "Paris", "Berlin"]
@@ -45,9 +47,43 @@ def about():
         return response
 
 
+def message_game(number_1_30, secret_number):
+    message = ""
+    if number_1_30 == secret_number:
+        message = "Congratulations, you guessed the number!"
+    elif number_1_30 < secret_number:
+        message = "Sorry, the number was too small!"
+    elif number_1_30 > secret_number:
+        message = "Sorry, the number you entered was too big!"
+    return message
+
+
 @app.route("/guess", methods=["GET", "POST"])
 def guess():
-    return render_template("guess.html")
+    secret_number = int(request.cookies.get("secret_number"))
+    if request.method == "GET":
+        return render_template("guess.html")
+    elif request.method == "POST":
+        if not secret_number:
+            secret_number = random.randint(1, 30)
+            number_1_30 = request.form.get("number_1_30")
+            response = make_response(render_template("guess.html", number_1_30=number_1_30))
+            response.set_cookie("number_1_30", number_1_30)
+            response.set_cookie("secret_number", str(secret_number))
+            return response
+        else:
+            number_1_30 = int(request.form.get("number_1_30"))
+            response = make_response(render_template("guess.html",
+                                                     number_1_30=number_1_30,
+                                                     message=message_game(number_1_30, secret_number)
+                                                     )
+                                     )
+            response.set_cookie("number_1_30", str(number_1_30))
+            print(message_game(number_1_30, secret_number))
+            print(secret_number)
+            print(number_1_30)
+            return response
+
 
 
 @app.route("/portfolio")
