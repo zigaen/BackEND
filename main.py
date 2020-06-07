@@ -60,7 +60,7 @@ def message_game(number_1_30, secret_number):
 
 @app.route("/guess", methods=["GET", "POST"])
 def guess():
-    secret_number = int(request.cookies.get("secret_number"))
+    secret_number = request.cookies.get("secret_number")
     if request.method == "GET":
         return render_template("guess.html")
     elif request.method == "POST":
@@ -73,15 +73,13 @@ def guess():
             return response
         else:
             number_1_30 = int(request.form.get("number_1_30"))
+            secret_number = int(secret_number)
             response = make_response(render_template("guess.html",
                                                      number_1_30=number_1_30,
                                                      message=message_game(number_1_30, secret_number)
                                                      )
                                      )
             response.set_cookie("number_1_30", str(number_1_30))
-            print(message_game(number_1_30, secret_number))
-            print(secret_number)
-            print(number_1_30)
             return response
 
 
