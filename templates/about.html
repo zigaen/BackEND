@@ -3,7 +3,7 @@
 {% block content %}
     <p>More about me :)</p>
     {% if name %}
-    <p>Hello {{name}}!</p>
+    <p>Hello {{name}}! {{number}}</p>
     {% endif %}
     <form method="post" action="/about-me">
         <input type="text" name="contact-name" placeholder="Enter your name">
@@ -13,6 +13,9 @@
         <br>
 
         <textarea name="contact-message" placeholder="Enter your message"></textarea>
+        <br>
+
+        <input type="number" name="some-number" placeholder="Enter random number">
         <br>
 
         <button type="submit">Submit</button>

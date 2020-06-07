@@ -1,12 +1,12 @@
 body {
-    background-color: black;
-    color: white;
+    background-color: lightskyblue;
+    color: black;
 }
 
 .container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 33%;
+    width: 50%;
 
 }

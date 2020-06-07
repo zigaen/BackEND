@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 {% block title %} Homepage {% endblock title %}
 {% block content %}
-        <p>Current year: {{current_year}}</p>
-        <p>Current hour: {{current_hour}}</p>
+        <p>Current year:  {{current_year}}</p>
+        <p>Current hour:  {{current_hour}}</p>
+        <h3>Mesta iz vrha glave so: </h3>
+        <ul>
         {% for city in cities %}
-        <p>{{city}}</p>
+        <li><p>{{city}}</p></li>
         {% endfor %}
-        <li>
-        <ul> <a href="/about-me">About</a> </ul>
-        <ul> <a href="/portfolio">Portfolio</a> </ul>
-        <ul> <a href="/base">Jinja</a> </ul>
-        <ul> <a href="/guess">Guess the number game</a> </ul>
-        </li>
+        </ul>
+        <h3>Denarne valute so :</h3>
+        <ol>
+        {% for money in currency%}
+        <li>{{number}} {{money}}</li>
+        {% endfor %}
+        </ol>
         <img src="/static/img/smartninja-logo.png">
+        <div>"Show me the calculation: {{calc}}"</div>
 
 {% endblock content %}
 
