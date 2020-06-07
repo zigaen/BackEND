@@ -10,11 +10,7 @@ class User(db.Model):
     email = db.Column(db.String, unique=True)
 
 
-class Game(db.model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
-    email = db.Column(db.String, unique=True)
-    secret_number = db.Column(db.Integer, primary_key=True)
+
 
 
 

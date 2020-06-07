@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, make_response, redirect, url_for
 import datetime
 import random
-from models import User, db, Game
+from models import User, db
 
 app = Flask(__name__)
 db.create_all()  # create (new) tables in the database
