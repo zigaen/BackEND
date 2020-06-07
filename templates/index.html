@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% block title %} Homepage {% endblock title %}
+
 {% block content %}
-        <p>Current year:  {{current_year}}</p>
-        <p>Current hour:  {{current_hour}}</p>
-        <h3>{{some_text}}</h3>
-        <ul>
-        {% for city in cities %}
-        <li><p>{{city}}</p></li>
-        {% endfor %}
-        </ul>
-        <h3>Denarne valute so :</h3>
-        <ol>
-        {% for money in currency%}
-        <li>{{number}} {{money}}</li>
-        {% endfor %}
-        </ol>
-        <img src="/static/img/smartninja-logo.png">
-        <div>"Show me the calculation: {{calc}}"</div>
+<h3>The year is {{current_year}}</h3>
+<h3>The hour is {{current_hour}}</h3>
+
+{% if user %}
+    <p>Hello {{user.name}}</p>
+    <p>This is your email address: {{user.email}}</p>
+{% else %}
+    <form method="post" action="/login">
+        <input type="text" name="user-name" placeholder="Enter your name"><br>
+        <input type="email" name="user-email" placeholder="Enter your email address"><br>
+
+        <button>Submit</button>
+
+    </form>
+{% endif %}
 
 {% endblock content %}
 

@@ -1,26 +1,41 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, redirect, url_for
 import datetime
 import random
+from models import User, db, Game
 
 app = Flask(__name__)
-number = random.randint(1, 40)
+db.create_all()  # create (new) tables in the database
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    name = request.form.get("user-name")
+    email = request.form.get("user-email")
+
+    # create a User object
+    user = User(name=name, email=email)
+
+    # save the user object into a database
+    db.add(user)
+    db.commit()
+    response = make_response(redirect(url_for("index")))
+    response.set_cookie("email", email)
+
+    return response
 
 
 @app.route("/")
 def index():
-    some_number = request.cookies.get("some_number")
-    user_name = request.cookies.get("user_name")
-    if user_name:
-        some_text = user_name + ",  mesta iz vrha tvoje glave so: "
-    else:
-        some_text = "Mesta iz vrha glave so: "
+    email_address = request.cookies.get("email")
     current_year = datetime.datetime.now().year
     current_hour = datetime.datetime.now().minute
-    cities = ["Boston", "Vienna", "Paris", "Berlin"]
-    currency = ["$", "€", "tolar", "dinar", "kuna", "lira"]
-    calc = number * 21
+    # get user from the database based on email address
+    if email_address:
+        user = db.query(User).filter_by(email=email_address).first()
+    else:
+        user = None
 
-    return render_template("index.html", number=some_number, currency=currency, calc=calc, some_text=some_text, current_year=current_year, current_hour=current_hour, cities=cities, name=user_name)
+    return render_template("index.html", current_year=current_year, current_hour=current_hour, user=user)
 
 
 @app.route("/about-me", methods=["GET", "POST"])
@@ -50,7 +65,7 @@ def about():
 def message_game(number_1_30, secret_number):
     message = ""
     if number_1_30 == secret_number:
-        message = "Congratulations, you guessed the number! The secret number was :{0}  The secret number was reset".format(str(secret_number))
+        message = "Congratulations, you guessed the number! The secret number was :{0}  PLAY AGAIN! ".format(str(secret_number))
     elif number_1_30 < secret_number:
         message = "Sorry, the number was too small!"
     elif number_1_30 > secret_number:
