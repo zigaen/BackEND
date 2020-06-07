@@ -50,7 +50,7 @@ def about():
 def message_game(number_1_30, secret_number):
     message = ""
     if number_1_30 == secret_number:
-        message = "Congratulations, you guessed the number!"
+        message = "Congratulations, you guessed the number! The secret number was :{0}" .format(str(secret_number))
     elif number_1_30 < secret_number:
         message = "Sorry, the number was too small!"
     elif number_1_30 > secret_number:
@@ -64,23 +64,31 @@ def guess():
     if request.method == "GET":
         return render_template("guess.html")
     elif request.method == "POST":
+        number_1_30 = int(request.form.get("number_1_30"))
         if not secret_number:
             secret_number = random.randint(1, 30)
-            number_1_30 = request.form.get("number_1_30")
-            response = make_response(render_template("guess.html", number_1_30=number_1_30))
-            response.set_cookie("number_1_30", number_1_30)
+            response = make_response(render_template("guess.html",
+                                                     number_1_30=number_1_30,
+                                                     message=message_game(number_1_30,secret_number)
+                                                     ))
+            response.set_cookie("number_1_30", str(number_1_30))
             response.set_cookie("secret_number", str(secret_number))
             return response
         else:
-            number_1_30 = int(request.form.get("number_1_30"))
-            secret_number = int(secret_number)
-            response = make_response(render_template("guess.html",
-                                                     number_1_30=number_1_30,
-                                                     message=message_game(number_1_30, secret_number)
-                                                     )
-                                     )
-            response.set_cookie("number_1_30", str(number_1_30))
-            return response
+            if number_1_30:
+                secret_number = int(secret_number)
+                response = make_response(render_template("guess.html",
+                                                         number_1_30=number_1_30,
+                                                         message=message_game(number_1_30, secret_number)
+                                                         )
+                                         )
+                response.set_cookie("number_1_30", str(number_1_30))
+                if number_1_30 == secret_number:
+                    response.set_cookie("secret_number", "")
+                return response
+            else:
+                return render_template("guess.html", message="Input number!")
+
 
 
 
